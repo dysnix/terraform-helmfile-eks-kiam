@@ -1,0 +1,78 @@
+{
+  "Statement": [
+      {
+          "Action": [
+              "autoscaling:CreateAutoScalingGroup",
+              "autoscaling:CreateLaunchConfiguration",
+              "autoscaling:DescribeAutoScalingGroups",
+              "autoscaling:DescribeLaunchConfigurations",
+              "dynamodb:DescribeTable",
+              "ec2:AssignPrivateIpAddresses",
+              "ec2:AttachNetworkInterface",
+              "ec2:AuthorizeSecurityGroupEgress",
+              "ec2:AuthorizeSecurityGroupIngress",
+              "ec2:CreateNetworkInterface",
+              "ec2:CreateNetworkInterfacePermission",
+              "ec2:CreateSecurityGroup",
+              "ec2:CreateTags",
+              "ec2:DescribeAccountAttributes",
+              "ec2:DescribeAvailabilityZones",
+              "ec2:DescribeImages",
+              "ec2:DescribeInstanceStatus",
+              "ec2:DescribeInstances",
+              "ec2:DescribeNetworkInterfaces",
+              "ec2:DescribeSecurityGroups",
+              "ec2:DescribeSubnets",
+              "ec2:DescribeVpcs",
+              "ec2:ModifyNetworkInterfaceAttribute",
+              "ec2:RevokeSecurityGroupEgress",
+              "ec2:RunInstances",
+              "ecr:GetAuthorizationToken",
+              "eks:CreateCluster",
+              "eks:DescribeCluster",
+              "elasticloadbalancing:DescribeLoadBalancers",
+              "iam:AddRoleToInstanceProfile",
+              "iam:AttachRolePolicy",
+              "iam:CreateInstanceProfile",
+              "iam:CreatePolicy",
+              "iam:CreateRole",
+              "iam:GetInstanceProfile",
+              "iam:GetPolicy",
+              "iam:GetPolicyVersion",
+              "iam:GetRole",
+              "iam:GetUser",
+              "iam:ListAttachedRolePolicies"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+              "*"
+          ]
+      },
+      {
+          "Action": [
+              "ecr:BatchGetImage",
+              "ecr:GetDownloadUrlForLayer"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+              "arn:aws:ecr:us-east-1:602401143452:repository/amazon-k8s-cni",
+              "arn:aws:ecr:us-east-1:602401143452:repository/eks/kube-dns/dnsmasq-nanny",
+              "arn:aws:ecr:us-east-1:602401143452:repository/eks/kube-dns/kube-dns",
+              "arn:aws:ecr:us-east-1:602401143452:repository/eks/kube-dns/sidecar",
+              "arn:aws:ecr:us-east-1:602401143452:repository/eks/kube-proxy",
+              "arn:aws:ecr:us-east-1:602401143452:repository/eks/pause-amd64"
+          ]
+      },
+      {
+          "Action": [
+              "sts:AssumeRole"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+              "arn:aws:iam::291433380952:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+              "arn:aws:iam::291433380952:role/namespace-project-dev-eks20181128063425296400000005"
+          ]
+      }
+  ],
+  "Version": "2012-10-17"
+}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: test-s3
+  name: test-s3
+  namespace: test-s3
+  annotations:
+    iam.amazonaws.com/role: test-s3
+spec:
+  restartPolicy: Never
+  containers:
+  - name: test-s3
+    command: ["aws", "s3", "ls", "s3://opsfleet-terraform"]
+    image: amazon/aws-cli

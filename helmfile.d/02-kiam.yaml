@@ -1,0 +1,34 @@
+repositories:
+  - name: uswitch
+    url:  https://uswitch.github.io/kiam-helm-charts/charts/
+
+releases:
+  - name: kiam
+    namespace: kiam
+    version: ~5.7.0
+    chart: uswitch/kiam
+    atomic: true
+    values:
+      - agent:
+          host:
+            iptables: true
+            interface: "!eth0"
+        
+        server:
+          assumeRoleArn: arn:aws:iam::ACCOUNT_ID:role/opsfleet-test-kiam-server
+          sslCertHostPath: /etc/pki/ca-trust/extracted/pem
+
+          # extraEnv:
+          #   - name: GRPC_GO_LOG_SEVERITY_LEVEL
+          #     value: info
+          #   - name: GRPC_GO_LOG_VERBOSITY_LEVEL
+          #     value: "8"
+
+          nodeSelector:
+            node_pool: kiam-server
+
+          tolerations:
+          - key: "kiam"
+            operator: "Equal"
+            value: "true"
+            effect: "NoSchedule"
